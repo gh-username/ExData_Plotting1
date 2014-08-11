@@ -33,22 +33,30 @@ df$Time<-strptime(paste(df$Date,df$Time,sep=" "),format="%d/%m/%Y %H:%M:%S")
 df$Date<-as.Date(df$Date,format="%d/%m/%Y")
 
 ## Open graphics device for png output.
-png('plot3.png', res=72)
+png('plot4.png', res=72) 
 
-## Set parameters.
-par(cex.axis=.8)
-par(mar=c(5.1,4.1,4.1,2.1))
+## Set parameter to fill plots into 2x2 matrix, fill by column.
+par(mfcol = c(2,2))
+par(cex=0.8)
 
-## Create empty plot.
+## Create plot1
+plot(df$Time,df$Global_active_power, type='n', ylab="Global Active Power", xlab="")
+lines(df$Time,df$Global_active_power)
+
+## Create plot2
 plot(df$Time,df$Sub_metering_1, type='n', ylab="Energy Sub Metering", xlab="")
-
-## Add lines to plot.
 lines(df$Time,df$Sub_metering_1,col="black")
 lines(df$Time,df$Sub_metering_2,col="red")
 lines(df$Time,df$Sub_metering_3,col="blue")
+legend('topright', legend=c('Sub_metering_1','Sub_metering_2','Sub_metering_3'), lwd=c(1,1,1), col=c('black','red','blue'), bty='n', cex = 1)
 
-## Add legend to plot.
-legend('topright', legend=c('Sub_metering_1','Sub_metering_2','Sub_metering_3'), lwd=c(1,1,1), col=c('black','red','blue'))
+## Create plot3
+plot(df$Time,df$Voltage, type='n', ylab='Voltage', xlab='datetime')
+lines(df$Time,df$Voltage)
+
+## Create plot4
+plot(df$Time,df$Global_reactive_power, type='n', ylab='Global_reactive_power', xlab='datetime')
+lines(df$Time,df$Global_reactive_power)
 
 ## Close graphics device to create image file.
 dev.off()

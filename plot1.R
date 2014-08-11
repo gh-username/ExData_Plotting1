@@ -1,5 +1,5 @@
-ifelse(tolower(getwd())!="C:/Users/lambones/git/repos/ExData_Plotting1/",
-       setwd("C:/Users/lambones/git/repos/ExData_Plotting1"), getwd())
+# ifelse(tolower(getwd())!="C:/Users/lambones/git/repos/ExData_Plotting1/",
+#        setwd("C:/Users/lambones/git/repos/ExData_Plotting1"), getwd())
 
 ## Download zip file from website.
 url<-"https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
@@ -32,10 +32,17 @@ setwd("..")
 df$Time<-strptime(paste(df$Date,df$Time,sep=" "),format="%d/%m/%Y %H:%M:%S")
 df$Date<-as.Date(df$Date,format="%d/%m/%Y")
 
+## Open graphics device for png output.
 png('plot1.png', res=72)
+
+## Set parameters.
 par(cex.axis=.8)
 par(mar=c(5.1,4.1,4.1,2.1))
+
+## Create histogram.
 hist(df[,3], col='red', main="Global Active Power", xlab="Global Active Power (kilowatts)")
+
+## Close graphics device to create image file.
 dev.off()
 
 
